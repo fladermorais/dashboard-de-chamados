@@ -19,10 +19,10 @@ function processCSV(csvText) {
     
     // Loop para concatenar as informações
     rows.forEach(row => {
-        const fila = row[2];
+        const clienteBruto = row[2];        // exemplo: "Cliente X::Atend I::Sustentação"
+        const fila = clienteBruto.split("::")[0]; 
         const status = row[3];
         const atendente = row[4];
-        // const tempo = parseInt(row[6]);
         // ---- CÁLCULO DE DIAS A PARTIR DA DATA DO CSV ----
         const dataString = row[6].trim();
         
@@ -32,7 +32,6 @@ function processCSV(csvText) {
         const hoje = new Date();
         const diffTime = hoje - dataCampo;
         const tempo = Math.floor(diffTime / (1000 * 60 * 60 * 24)); // dias inteiros
-        // console.log(tempo);
         
         filaCount[fila] = (filaCount[fila] || 0) + 1;
         statusCount[status] = (statusCount[status] || 0) + 1;
