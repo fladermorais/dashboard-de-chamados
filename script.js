@@ -92,7 +92,7 @@ function createTable(elementId, dataObj) {
 function createChart(elementId, label, dataObj) {
     const ctx = document.getElementById(elementId).getContext("2d");
     new Chart(ctx, {
-        type: "pie",
+        type: "doughnut", // pie
         data: {
             labels: Object.keys(dataObj),
             datasets: [{ label, data: Object.values(dataObj) }]
