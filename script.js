@@ -1,9 +1,25 @@
-// carregamento do arquivo csv
-fetch('relatorio.csv')
-.then(response => response.text())
-.then(text => processCSV(text));
+// // carregamento do arquivo csv
+// fetch('relatorio.csv')
+// .then(response => response.text())
+// .then(text => processCSV(text));
 
-;
+// ;
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("dataAtual").textContent = new Date().toLocaleDateString('pt-BR');
+
+    const fileInput = document.getElementById("fileInput");
+    fileInput.addEventListener("change", handleFileUpload);
+});
+
+function handleFileUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = e => processCSV(e.target.result);
+    reader.readAsText(file);
+}
 
 function processCSV(csvText) {
     const rows = csvText.trim().split("\n").map(r => r.split(","));
